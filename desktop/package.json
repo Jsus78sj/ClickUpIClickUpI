@@ -1,0 +1,40 @@
+{
+  "name": "civildraft-desktop",
+  "productName": "CivilDraft",
+  "version": "1.1.0",
+  "description": "CivilDraft — مرسمة مخطّطات معمارية عربية (نسخة سطح المكتب)",
+  "author": "Abood",
+  "license": "MIT",
+  "private": true,
+  "main": "main.cjs",
+  "scripts": {
+    "prepare-app": "node prepare.cjs",
+    "start": "node prepare.cjs && electron .",
+    "dist": "node prepare.cjs && electron-builder --win nsis portable --x64"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.civildraft.app",
+    "productName": "CivilDraft",
+    "directories": { "output": "release", "buildResources": "build" },
+    "files": ["main.cjs", "app/**/*"],
+    "asar": true,
+    "win": {
+      "icon": "build/icon.png",
+      "target": ["nsis", "portable"]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "artifactName": "CivilDraft-Setup-${version}.${ext}"
+    },
+    "portable": {
+      "artifactName": "CivilDraft-Portable-${version}.${ext}"
+    }
+  }
+}
